@@ -4,6 +4,6 @@ from fastapi import FastAPI
 app = FastAPI()
 
 
-@app.get("/", tags=['root'])
+@app.get("/", tags=["root"])
 async def root():
-    return {'data': 'Hello'}
+    return {"data": "Hello"}
