@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "todo-fastapi-htmx"
+version = "0.1.0"
+description = ""
+authors = ["Diogo Matos <alvesdiogo.mts@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+sqlalchemy = "^2.0.20"
+jinja2 = "^3.1.2"
+fastapi = "^0.103.0"
+uvicorn = "^0.23.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
