@@ -35,9 +35,9 @@ def get_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 @app.get("/users/{user_id}", tags=["users"], response_model=schemas.User)
 def get_user_by_id(user_id: int, db: Session = Depends(get_db)):
     db_user = crud.read_user(db=db, user_id=user_id)
-    print(" ---- checar se usuario existe ---- ")
     if db_user is None:
         raise HTTPException(status_code=404, detail="Usuario nao encontrado")
+    db_user.items = crud.read_todos_by_user(db=db, owner_id=user_id)
     return db_user
 
 
