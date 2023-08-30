@@ -1,4 +1,7 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, Request
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 
 import schemas
@@ -9,6 +12,8 @@ import models
 models.Base.metadata.create_all(bind=database.engine)
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
+templates = Jinja2Templates(directory="app/templates")
 
 
 def get_db():
@@ -19,9 +24,9 @@ def get_db():
         db.close()
 
 
-@app.get("/", tags=["root"])
-async def root():
-    return {"data": "Hello"}
+@app.get("/", tags=["index"], response_class=HTMLResponse)
+async def index(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 # GET todos os users
