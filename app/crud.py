@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 
-from . import models, schemas
+import models
+import schemas
 
 
 # CREATE, READ, UPDATE, DELETE User get
@@ -22,7 +23,7 @@ def read_user_by_email(db: Session, email: str):
 # CREATE um usuario a partir do schema UserCreate e commita para o banco
 def create_user(db: Session, user: schemas.UserCreate):
     fake_pwd = user.password + ":fakehashed"
-    new_user = models.User(email=user.email, password=fake_pwd)
+    new_user = models.User(email=user.email, fk_hashed_password=fake_pwd)
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
