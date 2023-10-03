@@ -21,6 +21,6 @@ class Todo(Base):
     title = Column(String, index=True)
     content = Column(String)
     is_complete = Column(Boolean, default=False)
-    owner_id = Column(Integer, ForeignKey("users.id"))
+    # owner_id = Column(Integer, ForeignKey("users.id"))
 
-    owner = relationship("User", back_populates="todos")
+    # owner = relationship("User", back_populates="todos")
